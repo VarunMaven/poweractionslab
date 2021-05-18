@@ -29,7 +29,7 @@ jobs:
     - name: Test pack-solution action
       uses: microsoft/powerplatform-actions/pack-solution@v0
       with:
-        solution-folder: 'out/solutions/TestSolution'
+        solution-folder: 'solutions/TestSolution'
         solution-file: 'out/exported/TestSolution.zip'
         solution-type: 'Unmanaged'
     - name: Test import-solution action with username/password
