@@ -27,7 +27,7 @@ jobs:
         user-name: 'rich.lee@CRM316601.onmicrosoft.com'
         password-secret: ${{ secrets.password }}
     - name: Test pack-solution action
-      uses: microsoft/powerplatform-actions/export-solution@v0
+      uses: ./pack-solution
       with:
         solution-folder: 'out/solutions/TestSolution'
         solution-file: 'out/exported/TestSolution.zip'
