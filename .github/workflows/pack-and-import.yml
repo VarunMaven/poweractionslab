@@ -29,8 +29,8 @@ jobs:
     - name: Test pack-solution action
       uses: microsoft/powerplatform-actions/pack-solution@v0
       with:
-        solution-folder: 'out/solutions/TestSolution'
-        solution-file: 'out/exported/TestSolution.zip'
+        solution-folder: 'C:/Dynamics/poweractionslab/solutions/TestSolutionout'
+        solution-file: 'C:/Dynamics/poweractionslab/solutions/TestSolution.zip'
         solution-type: 'Unmanaged'
     - name: Test import-solution action with username/password
       uses: microsoft/powerplatform-actions/import-solution@v0
