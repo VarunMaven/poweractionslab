@@ -27,13 +27,11 @@ jobs:
         user-name: 'rich.lee@CRM316601.onmicrosoft.com'
         password-secret: ${{ secrets.password }}
     - name: Test pack-solution action
-      uses: ./pack-solution
       with:
         solution-folder: 'out/solutions/TestSolution'
         solution-file: 'out/exported/TestSolution.zip'
         solution-type: 'Unmanaged'
     - name: Test import-solution action with username/password
-      uses: ./import-solution
       with:
         environment-url: 'https://kornferrydev.crm.dynamics.com/'
         user-name: 'rich.lee@CRM316601.onmicrosoft.com'
