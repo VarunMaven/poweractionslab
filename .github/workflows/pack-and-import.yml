@@ -27,14 +27,12 @@ jobs:
         user-name: 'rich.lee@CRM316601.onmicrosoft.com'
         password-secret: ${{ secrets.password }}
     - name: Test pack-solution action
-      if: matrix.os == 'windows-latest'   # SoPa.exe is windows only
       uses: microsoft/powerplatform-actions/export-solution@v0
       with:
         solution-folder: 'out/solutions/TestSolution'
         solution-file: 'out/exported/TestSolution.zip'
         solution-type: 'Unmanaged'
     - name: Test import-solution action with username/password
-      if: matrix.os == 'windows-latest'   # The solution we test with here is created in a previous windows-only step
       uses: ./import-solution
       with:
         environment-url: 'https://kornferrydev.crm.dynamics.com/'
