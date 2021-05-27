@@ -47,4 +47,4 @@ jobs:
         solution-target-folder: solutions/TestSolution
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         allow-empty-commit: true
-        branch-name:test
+        branch-name: testBranch
