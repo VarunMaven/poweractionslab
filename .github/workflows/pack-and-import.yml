@@ -36,8 +36,21 @@ jobs:
       uses: microsoft/powerplatform-actions/pack-solution@v0
       with:
         solution-folder: 'solutions/TestSolution'
-        solution-file: 'out/exported/{{ steps.extract_branch.outputs.branch }}.zip'
+        solution-file: 'out/exported/TestSolution.zip'
         solution-type: 'Unmanaged'
+    - name: unpack-solution action
+      uses: microsoft/powerplatform-actions/unpack-solution@v0
+      with:
+        solution-file: out/exported/TestSolution.zip
+        solution-folder: out/solutions/{{ steps.extract_branch.outputs.branch }}
+        solution-type: 'Unmanaged'
+        overwrite-files: true
+    - name: Test pack-solution action
+      uses: microsoft/powerplatform-actions/pack-solution@v0
+      with:
+        solution-folder: 'out/solutions/{{ steps.extract_branch.outputs.branch }}'
+        solution-file: 'out/exported/{{ steps.extract_branch.outputs.branch }}.zip'
+        solution-type: 'Unmanaged' 
     - name: Test import-solution action with username/password
       uses: microsoft/powerplatform-actions/import-solution@v0
       with:
@@ -47,5 +60,3 @@ jobs:
         solution-file: 'out/exported/{{ steps.extract_branch.outputs.branch }}.zip'
         force-overwrite: true
         run-asynchronously: true
-
-    
