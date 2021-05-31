@@ -19,7 +19,6 @@ jobs:
       shell: bash
       run: echo "::stop-commands::`echo ::set-env name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/})`"
       id: extract_branch
-    - name: conditional environment
       if: ($BRANCH_NAME == 'testBranch')
     - name: who-am-i action
       uses: microsoft/powerplatform-actions/who-am-i@v0
