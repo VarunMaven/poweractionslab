@@ -22,7 +22,7 @@ jobs:
       id: extract_branch
       
     - name: conditional environment
-      run: if $BRANCH_NAME == 'testBranch'
+      run: if ($BRANCH_NAME == 'testBranch')
     - name: who-am-i action
       uses: microsoft/powerplatform-actions/who-am-i@v0
       with:
