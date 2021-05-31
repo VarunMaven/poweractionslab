@@ -7,7 +7,7 @@ on:
 
 jobs:
   export-from-dev:
-    if: ${{ github.ref == 'refs/heads/testBranch' }}
+    # if: ${{ github.ref == 'refs/heads/testBranch' }}
     runs-on: windows-latest
     env:
       RUNNER_DEBUG: 1
@@ -20,6 +20,7 @@ jobs:
       run: echo "::stop-commands::`echo ::set-env name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/})`"
       id: extract_branch
     - name: who-am-i action
+      if: ($BRANCH_NAME == 'testBranch')
       uses: microsoft/powerplatform-actions/who-am-i@v0
       with:
         environment-url: 'https://kornferrydev.crm.dynamics.com/'
