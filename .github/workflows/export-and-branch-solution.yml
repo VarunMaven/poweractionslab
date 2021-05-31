@@ -7,22 +7,23 @@ on:
 
 jobs:
   export-from-dev:
+    # if: ${{ github.ref == 'refs/heads/testBranch' }}
     runs-on: windows-latest
     env:
       RUNNER_DEBUG: 1
-
     steps:
     - uses: actions/checkout@v2
       with:
         lfs: true
-        
     - name: extract-branch-name
       shell: bash
       run: echo "::stop-commands::`echo ::set-env name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/})`"
       id: extract_branch
       
-    - name: conditional environment
-      run: if $BRANCH_NAME == 'testBranch'
+    - name: branch check
+      if: (github.ref != 'testBranch')
+      run: exit 1
+      
     - name: who-am-i action
       uses: microsoft/powerplatform-actions/who-am-i@v0
       with:
