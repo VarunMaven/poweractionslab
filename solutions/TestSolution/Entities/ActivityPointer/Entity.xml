@@ -3,6 +3,15 @@
   <Name LocalizedName="Activity" OriginalName="Activity">ActivityPointer</Name>
   <EntityInfo>
     <entity Name="ActivityPointer">
+      <LocalizedNames>
+        <LocalizedName description="Activity" languagecode="1033" />
+      </LocalizedNames>
+      <LocalizedCollectionNames>
+        <LocalizedCollectionName description="Activities" languagecode="1033" />
+      </LocalizedCollectionNames>
+      <Descriptions>
+        <Description description="Task performed, or to be performed, by a user. An activity is any action for which an entry can be made on a calendar." languagecode="1033" />
+      </Descriptions>
       <attributes>
         <attribute PhysicalName="RegardingObjectId">
           <Type>lookup</Type>
