@@ -7,10 +7,10 @@ on:
 
 jobs:
   export-from-dev:
+    if: ${{ github.ref == 'refs/heads/testBranch' }}
     runs-on: windows-latest
     env:
       RUNNER_DEBUG: 1
-
     steps:
     - uses: actions/checkout@v2
       with:
@@ -20,14 +20,12 @@ jobs:
       run: echo "::stop-commands::`echo ::set-env name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/})`"
       id: extract_branch
     - name: who-am-i action
-      if: ($BRANCH_NAME == 'testBranch')
       uses: microsoft/powerplatform-actions/who-am-i@v0
       with:
         environment-url: 'https://kornferrydev.crm.dynamics.com/'
         user-name: 'rich.lee@CRM316601.onmicrosoft.com'
         password-secret: ${{ secrets.password }}
     - name: export-solution action
-      if: ($BRANCH_NAME == 'testBranch')
       uses: microsoft/powerplatform-actions/export-solution@v0
       with:
         environment-url: 'https://kornferrydev.crm.dynamics.com/'
@@ -37,7 +35,6 @@ jobs:
         solution-output-file: out/exported/TestSolution.zip
 
     - name: unpack-solution action
-      if: ($BRANCH_NAME == 'testBranch')
       uses: microsoft/powerplatform-actions/unpack-solution@v0
       with:
         solution-file: out/exported/TestSolution.zip
@@ -46,7 +43,6 @@ jobs:
         overwrite-files: trueBranch
 
     - name: branch-solution, prepare it for a PullRequest
-      if: ($BRANCH_NAME == 'testBranch')
       uses: microsoft/powerplatform-actions/branch-solution@v0
       with:
         solution-folder: out/solutions/TestSolution
