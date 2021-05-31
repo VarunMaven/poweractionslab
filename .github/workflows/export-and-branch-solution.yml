@@ -19,8 +19,12 @@ jobs:
       shell: bash
       run: echo "::stop-commands::`echo ::set-env name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/})`"
       id: extract_branch
+      
+    - name: branch check
+      if: (github.ref != 'testBranch')
+      run: exit 1
+      
     - name: who-am-i action
-      if: ($BRANCH_NAME == 'testBranch')
       uses: microsoft/powerplatform-actions/who-am-i@v0
       with:
         environment-url: 'https://kornferrydev.crm.dynamics.com/'
