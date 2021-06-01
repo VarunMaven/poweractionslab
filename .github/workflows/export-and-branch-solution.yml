@@ -28,9 +28,20 @@ jobs:
         branch=${branch%/*}
         branch=${branch^^}
         echo "$branch"
-        endpoint="$branch""_DEV_USERNAME"
-        echo "$endpoint"
+        endpoint="$branch""_DEV_ENDPOINT"
+        username="$branch""_DEV_USERNAME"
+        secret="$branch""_DEV_SECRET"
         echo "echo:stop-commands::`echo ::set-env name=DEV_ENV_EP::$(echo ${endpoint})`"
+        echo "echo:stop-commands::`echo ::set-env name=DEV_SECRET::$(echo ${secret})`"
+        echo "echo:stop-commands::`echo ::set-env name=DEV_USERNAME::$(echo ${username})`"
+        
+        
+    - name: who-am-i action
+      uses: microsoft/powerplatform-actions/who-am-i@v0
+      with:
+          environment-url: ${{ secrets[env.DEV_ENV_EP] }}
+          user-name: ${{ secrets[env.DEV_USERNAME] }}
+          password-secret: ${{ secrets[env.DEV_SECRET] }}
         
         
         
