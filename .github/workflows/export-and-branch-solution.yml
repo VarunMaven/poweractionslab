@@ -29,6 +29,7 @@ jobs:
         echo "$branch"
         endpoint="$branch""_DEV_ENDPOINT"
         echo "$endpoint"
+        echo "echo:stop-commands::`echo ::set-env name=DEV_ENV_EP::$(echo ${endpoint})`"
         
         
         
