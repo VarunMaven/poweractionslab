@@ -27,7 +27,7 @@ jobs:
         branch=${BRANCH_NAME_TEMP%/*}
         branch=${branch%/*}
         echo "$branch"
-        endpoint="$branch"text"_DEV_ENDPOINT"
+        endpoint="$branch_DEV_ENDPOINT"
         echo "$endpoint"
         
         
