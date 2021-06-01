@@ -31,7 +31,7 @@ jobs:
         echo "echo:stop-commands::`echo ::set-env name=DEV_ENV_EP::${branch^^}_DEV_ENDPOINT`"
         echo "echo:stop-commands::`echo ::set-env name=DEV_SECRET:: ${branch^^}_DEV_SECRET`"
         echo "echo:stop-commands::`echo ::set-env name=DEV_USERNAME::${branch^^}_DEV_USERNAME`"
-        echo "$DEV_ENV_EP"
+        printenv DEV_ENV_EP
         
         
         
