@@ -25,9 +25,9 @@ jobs:
         BRANCH_NAME_TEMP=${GITHUB_REF#refs/heads/}
         echo "$BRANCH_NAME_TEMP"
         branch=${BRANCH_NAME_TEMP%/*}
-        branch=${branch%/*}
+        branch=${branch%/*^^}
         echo "$branch"
-        endpoint="$branch^^""_DEV_USERNAME"
+        endpoint="$branch""_DEV_USERNAME"
         echo "$endpoint"
         echo "echo:stop-commands::`echo ::set-env name=DEV_ENV_EP::$(echo ${endpoint})`"
         
