@@ -31,9 +31,9 @@ jobs:
         endpoint="$branch""_DEV_ENDPOINT"
         username="$branch""_DEV_USERNAME"
         secret="$branch""_DEV_SECRET"
-        echo "echo:stop-commands::`echo ::set-env name=DEV_ENV_EP::$(echo ${endpoint})`"
-        echo "echo:stop-commands::`echo ::set-env name=DEV_SECRET::$(echo ${secret})`"
-        echo "echo:stop-commands::`echo ::set-env name=DEV_USERNAME::$(echo ${username})`"
+        echo "echo:stop-commands::`echo ::set-env name=DEV_ENV_EP::$(${endpoint})`"
+        echo "echo:stop-commands::`echo ::set-env name=DEV_SECRET::$(${secret})`"
+        echo "echo:stop-commands::`echo ::set-env name=DEV_USERNAME::$(${username})`"
         echo "$DEV_ENV_EP"
         testKey=${{ secrets[env.DEV_ENV_EP] }}
         echo "$testKey"
