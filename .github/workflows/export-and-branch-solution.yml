@@ -25,7 +25,8 @@ jobs:
         BRANCH_NAME_TEMP=${GITHUB_REF#refs/heads/}
         echo "$BRANCH_NAME_TEMP"
         branch=${BRANCH_NAME_TEMP%/*}
-        branch=${branch%/*^^}
+        branch=${branch%/*}
+        branch=${branch^^}
         echo "$branch"
         endpoint="$branch""_DEV_USERNAME"
         echo "$endpoint"
