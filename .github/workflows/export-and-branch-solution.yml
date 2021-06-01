@@ -27,11 +27,9 @@ jobs:
         branch=${BRANCH_NAME_TEMP%/*}
         branch=${branch%/*}
         echo "$branch"
-        echo "echo:stop-commands::`echo ::set-env name=BRANCH_NAME::$(echo ${BRANCH_NAME_TEMP%/*})`"
-        echo "echo:stop-commands::`echo ::set-env name=DEV_ENV_EP::${branch^^}_DEV_ENDPOINT`"
-        echo "echo:stop-commands::`echo ::set-env name=DEV_SECRET:: ${branch^^}_DEV_SECRET`"
-        echo "echo:stop-commands::`echo ::set-env name=DEV_USERNAME::${branch^^}_DEV_USERNAME`"
-        printenv DEV_ENV_EP
+        endpoint="$branch"text"_DEV_ENDPOINT"
+        echo "$endpoint"
+        
         
         
         
