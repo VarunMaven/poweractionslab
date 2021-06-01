@@ -34,6 +34,7 @@ jobs:
         echo "echo:stop-commands::`echo ::set-env name=DEV_ENV_EP::$(echo ${endpoint})`"
         echo "echo:stop-commands::`echo ::set-env name=DEV_SECRET::$(echo ${secret})`"
         echo "echo:stop-commands::`echo ::set-env name=DEV_USERNAME::$(echo ${username})`"
+        echo "$DEV_ENV_EP"
         testKey=${{ secrets[env.DEV_ENV_EP] }}
         echo "$testKey"
         
