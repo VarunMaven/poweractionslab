@@ -34,12 +34,13 @@ jobs:
         echo "echo:stop-commands::`echo ::set-env name=DEV_ENV_EP::$(echo ${endpoint})`"
         echo "echo:stop-commands::`echo ::set-env name=DEV_SECRET::$(echo ${secret})`"
         echo "echo:stop-commands::`echo ::set-env name=DEV_USERNAME::$(echo ${username})`"
+        testKey=${{ secrets[env.DEV_ENV_EP] }}
         
         
     - name: who-am-i action
       uses: microsoft/powerplatform-actions/who-am-i@v0
       with:
-          environment-url: ${{ secrets[env.DEV_ENV_EP] }}
+          environment-url: ${{ testKey }}
           user-name: ${{ secrets[env.DEV_USERNAME] }}
           password-secret: ${{ secrets[env.DEV_SECRET] }}
         
