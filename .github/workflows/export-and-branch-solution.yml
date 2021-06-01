@@ -37,6 +37,7 @@ jobs:
         echo "$DEV_ENV_EP"
         testKey=${{ secrets[env.DEV_ENV_EP] }}
         echo "$testKey"
+        printenv
         
         
     - name: who-am-i action
