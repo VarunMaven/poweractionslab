@@ -4,6 +4,8 @@ name: export-and-branch-solution
 
 on:
   workflow_dispatch:
+  push:
+    branches: [ '*/feature/*' ] 
 
 jobs:
   export-from-dev:
@@ -16,41 +18,58 @@ jobs:
       with:
         lfs: true
         
+        
     - name: extract-branch-name
       shell: bash
-      run: echo "::stop-commands::`echo ::set-env name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/})`"
-      id: extract_branch
+      run : |
+        BRANCH_NAME_TEMP=${GITHUB_REF#refs/heads/}
+        echo "$BRANCH_NAME_TEMP"
+        branch=${BRANCH_NAME_TEMP%/*}
+        branch=${branch%/*}
+        echo "$branch"
+        echo "echo:stop-commands::`echo ::set-env name=BRANCH_NAME::$(echo ${BRANCH_NAME_TEMP%/*})`"
+        echo "echo:stop-commands::`echo ::set-env name=DEV_ENV_EP::${branch^^}_DEV_ENDPOINT`"
+        echo "echo:stop-commands::`echo ::set-env name=DEV_SECRET:: ${branch^^}_DEV_SECRET`"
+        echo "echo:stop-commands::`echo ::set-env name=DEV_USERNAME::${branch^^}_DEV_USERNAME`"
+        echo "$DEV_ENV_EP"
+        
+        
+        
+#     - name: extract-branch-name
+#       shell: bash
+#       run: echo "::stop-commands::`echo ::set-env name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/})`"
+#       id: extract_branch
       
-    - name: conditional environment
-      run: if $BRANCH_NAME == 'testBranch'
-    - name: who-am-i action
-      uses: microsoft/powerplatform-actions/who-am-i@v0
-      with:
-        environment-url: 'https://kornferrydev.crm.dynamics.com/'
-        user-name: 'rich.lee@CRM316601.onmicrosoft.com'
-        password-secret: ${{ secrets.password }}
-    - name: export-solution action
-      uses: microsoft/powerplatform-actions/export-solution@v0
-      with:
-        environment-url: 'https://kornferrydev.crm.dynamics.com/'
-        user-name: 'rich.lee@CRM316601.onmicrosoft.com'
-        password-secret: ${{ secrets.password }}
-        solution-name: TestSolution
-        solution-output-file: out/exported/TestSolution.zip
+#     - name: conditional environment
+#       run: if $BRANCH_NAME == 'testBranch'
+#     - name: who-am-i action
+#       uses: microsoft/powerplatform-actions/who-am-i@v0
+#       with:
+#         environment-url: 'https://kornferrydev.crm.dynamics.com/'
+#         user-name: 'rich.lee@CRM316601.onmicrosoft.com'
+#         password-secret: ${{ secrets.password }}
+#     - name: export-solution action
+#       uses: microsoft/powerplatform-actions/export-solution@v0
+#       with:
+#         environment-url: 'https://kornferrydev.crm.dynamics.com/'
+#         user-name: 'rich.lee@CRM316601.onmicrosoft.com'
+#         password-secret: ${{ secrets.password }}
+#         solution-name: TestSolution
+#         solution-output-file: out/exported/TestSolution.zip
 
-    - name: unpack-solution action
-      uses: microsoft/powerplatform-actions/unpack-solution@v0
-      with:
-        solution-file: out/exported/TestSolution.zip
-        solution-folder: out/solutions/TestSolution
-        solution-type: 'Unmanaged'
-        overwrite-files: trueBranch
+#     - name: unpack-solution action
+#       uses: microsoft/powerplatform-actions/unpack-solution@v0
+#       with:
+#         solution-file: out/exported/TestSolution.zip
+#         solution-folder: out/solutions/TestSolution
+#         solution-type: 'Unmanaged'
+#         overwrite-files: trueBranch
 
-    - name: branch-solution, prepare it for a PullRequest
-      uses: microsoft/powerplatform-actions/branch-solution@v0
-      with:
-        solution-folder: out/solutions/TestSolution
-        solution-target-folder: solutions/TestSolution
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-        allow-empty-commit: true
-        branch-name: $BRANCH_NAME
+#     - name: branch-solution, prepare it for a PullRequest
+#       uses: microsoft/powerplatform-actions/branch-solution@v0
+#       with:
+#         solution-folder: out/solutions/TestSolution
+#         solution-target-folder: solutions/TestSolution
+#         repo-token: ${{ secrets.GITHUB_TOKEN }}
+#         allow-empty-commit: true
+#         branch-name: $BRANCH_NAME
